@@ -1,26 +1,24 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 public class MyApplication {
-    public static void main(String[] args){
-        Scanner jin = new Scanner(System.in); //Scanner named by "jin"
-        int size =10;//number of points
-        Point[] All = new Point[size];
+    public static void main(String[] args) throws FileNotFoundException {
+        File file = new File("C:\\Users\\20fut\\IdeaProjects\\untitled3\\src\\source.txt");
 
-        for (int i =0;i<size;i++){
-            double x = jin.nextDouble();
-            double y = jin.nextDouble();
-            Point temp = new Point(x,y);
-            All[i]=temp;
-        }// Input of every point
+        Scanner sc = new Scanner(file);
+        Shape shape = new Shape();
 
-        Shape shape = new Shape(All);//Creating shape class object, and giving to it the points that we get above
+        while (sc.hasNext()) {
+            double x = sc.nextDouble();
+            double y = sc.nextDouble();
 
-        for(int i =0;i<size;i++){
-            String temp = shape.points[i].ToString();//Output of everypoint
-            System.out.println(temp);
+            Point point = new Point(x, y);
+            shape.addPoint(point);
         }
-        System.out.println("Perimeter:" + shape.Perimeter());
-        System.out.println("Longest Side:" + shape.LongestSide());
-        System.out.println("Average Side:" + shape.AverageSide());
 
+        System.out.println("Perimeter: " + shape.calculatePerimeter());
+        System.out.println("Longest Side: " + shape.getLongestSide());
+        System.out.println("Average Side: " + shape.getAverageSide());
     }
 }
